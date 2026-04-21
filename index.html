@@ -1,190 +1,169 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cookies Example</title>
+    <title>Cookie Handling Examples</title>
 </head>
 <body>
-  <div id="exercitiu1">
-<button id="show1">Show cookies</button>
-<button id="clear1">Clear</button>
-<div>
-  <code id="cookie-value1"></code>
-</div>
-</div>
 
-
-
-<div id="exercitiu2>
-<button id="show2">Show cookie value</button>
-<button id="clear2">Clear</button>
-<div>
-  <code id="cookie-value2"></code>
-</div>
+<!-- EX1: Show cookies -->
+<div id="exercitiu1">
+    <button id="show1">Show cookies</button>
+    <button id="clear1">Clear</button>
+    <div>
+        <code id="cookie-value1"></code>
+    </div>
 </div>
 
-
-<div id="exercitiu3>
-<button id="do-once3">Only do something once</button>
-<button id="clear3">Clear</button>
-<div>
-  <code id="output3"></code>
+<!-- EX2: Show cookie value -->
+<div id="exercitiu2">
+    <button id="show2">Show cookie value</button>
+    <button id="clear2">Clear</button>
+    <div>
+        <code id="cookie-value2"></code>
+    </div>
 </div>
+
+<!-- EX3: Only do something once -->
+<div id="exercitiu3">
+    <button id="do-once3">Only do something once</button>
+    <button id="clear3">Clear</button>
+    <div>
+        <code id="output3"></code>
+    </div>
 </div>
 
-
+<!-- EX4: Reset cookie once -->
 <div id="exercitiu4">
-<button id="reset4">Reset only once cookie</button>
-<button id="clear4">Clear</button>
-<div>
-  <code id="output4"></code>
-</div>
+    <button id="reset4">Reset only once cookie</button>
+    <button id="clear4">Clear</button>
+    <div>
+        <code id="output4"></code>
+    </div>
 </div>
 
-
+<!-- EX5: Check if cookie exists -->
 <div id="exercitiu5">
-<button id="check5">Check a cookie exists</button>
-<button id="clear5">Clear</button>
-<div>
-  <code id="output5"></code>
+    <button id="check5">Check a cookie exists</button>
+    <button id="clear5">Clear</button>
+    <div>
+        <code id="output5"></code>
+    </div>
 </div>
-</div>
 
-
-
+<!-- EX6: Check cookie value -->
 <div id="exercitiu6">
-<button id="check6">Check that a cookie has a specific value</button>
-<button id="clear6">Clear</button>
-<div>
-  <code id="output6"></code>
+    <button id="check6">Check that a cookie has a specific value</button>
+    <button id="clear6">Clear</button>
+    <div>
+        <code id="output6"></code>
+    </div>
 </div>
-</div>
 
-    <script>
-const showBtn1 = document.getElementById("show1");
-const clearBtn1 = document.getElementById("clear1");
-const output1 = document.getElementById("cookie-value1");
+<script>
+    // EX1: Show cookies
+    const showBtn1 = document.getElementById("show1");
+    const clearBtn1 = document.getElementById("clear1");
+    const output1 = document.getElementById("cookie-value1");
 
-// Note that we are setting `SameSite=None;` in this example because the example
-// needs to work cross-origin.
-// It is more common not to set the `SameSite` attribute, which results in the default,
-// and more secure, value of `SameSite=Lax;`
-document.cookie = "name=Oeschger; SameSite=None; Secure";
-document.cookie = "favorite_food=tripe; SameSite=None; Secure";
+    document.cookie = "name=Oeschger; SameSite=None; Secure";
+    document.cookie = "favorite_food=tripe; SameSite=None; Secure";
 
-showBtn.addEventListener("click", () => {
-  output.textContent = `> ${document.cookie}`;
-});
-clearBtn.addEventListener("click", () => {
-  output.textContent = "";
-});
+    showBtn1.addEventListener("click", () => {
+        output1.textContent = `> ${document.cookie}`;
+    });
+    clearBtn1.addEventListener("click", () => {
+        output1.textContent = "";
+    });
 
-const showBtn2 = document.getElementById("show2");
-const clearBtn2 = document.getElementById("clear2");
-const output2 = document.getElementById("cookie-value2");
+    // EX2: Show cookie value
+    const showBtn2 = document.getElementById("show2");
+    const clearBtn2 = document.getElementById("clear2");
+    const output2 = document.getElementById("cookie-value2");
 
-// Note that we are setting `SameSite=None;` in this example because the example
-// needs to work cross-origin.
-// It is more common not to set the `SameSite` attribute, which results in the default,
-// and more secure, value of `SameSite=Lax;`
-document.cookie = "test1=Hello; SameSite=None; Secure";
-document.cookie = "test2=World; SameSite=None; Secure";
+    document.cookie = "test1=Hello; SameSite=None; Secure";
+    document.cookie = "test2=World; SameSite=None; Secure";
 
-showBtn.addEventListener("click", () => {
-  const cookieValue = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("test2="))
-    ?.split("=")[1];
-  output.textContent = `> ${cookieValue}`;
-});
-clearBtn.addEventListener("click", () => {
-  output.textContent = "";
-});
+    showBtn2.addEventListener("click", () => {
+        const cookieValue = document.cookie
+            .split("; ")
+            .find((row) => row.startsWith("test2="))
+            ?.split("=")[1];
+        output2.textContent = `> ${cookieValue}`;
+    });
+    clearBtn2.addEventListener("click", () => {
+        output2.textContent = "";
+    });
 
-const doOnceBtn3 = document.getElementById("do-once3");
-const clearBtn3 = document.getElementById("clear3");
-const output3 = document.getElementById("output3");
+    // EX3: Only do something once
+    const doOnceBtn3 = document.getElementById("do-once3");
+    const clearBtn3 = document.getElementById("clear3");
+    const output3 = document.getElementById("output3");
 
-doOnceBtn.addEventListener("click", () => {
-  if (
-    !document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("doSomethingOnlyOnce"))
-  ) {
-    // Note that we are setting `SameSite=None;` in this example because the example
-    // needs to work cross-origin.
-    // It is more common not to set the `SameSite` attribute, which results in the default,
-    // and more secure, value of `SameSite=Lax;`
-    document.cookie =
-      "doSomethingOnlyOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure";
+    doOnceBtn3.addEventListener("click", () => {
+        if (
+            !document.cookie
+                .split("; ")
+                .find((row) => row.startsWith("doSomethingOnlyOnce"))
+        ) {
+            document.cookie =
+                "doSomethingOnlyOnce=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure";
+            output3.textContent = "> Do something here!";
+        }
+    });
+    clearBtn3.addEventListener("click", () => {
+        output3.textContent = "";
+    });
 
-    output.textContent = "> Do something here!";
-  }
-});
-clearBtn.addEventListener("click", () => {
-  output.textContent = "";
-});
+    // EX4: Reset only once cookie
+    const resetBtn4 = document.getElementById("reset4");
+    const clearBtn4 = document.getElementById("clear4");
+    const output4 = document.getElementById("output4");
 
-const resetBtn4 = document.getElementById("reset4");
-const clearBtn4 = document.getElementById("clear4");
-const output4 = document.getElementById("output4");
+    resetBtn4.addEventListener("click", () => {
+        document.cookie =
+            "doSomethingOnlyOnce=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+        output4.textContent = "> Reset!";
+    });
+    clearBtn4.addEventListener("click", () => {
+        output4.textContent = "";
+    });
 
-resetBtn.addEventListener("click", () => {
-  // Note that we are setting `SameSite=None;` in this example because the example
-  // needs to work cross-origin.
-  // It is more common not to set the `SameSite` attribute, which results in the default,
-  // and more secure, value of `SameSite=Lax;`
-  document.cookie =
-    "doSomethingOnlyOnce=; expires=Thu, 01 Jan 1970 00:00:00 GMT; SameSite=None; Secure";
+    // EX5: Check if cookie exists
+    const checkBtn5 = document.getElementById("check5");
+    const clearBtn5 = document.getElementById("clear5");
+    const output5 = document.getElementById("output5");
 
-  const output = document.getElementById("reset-once");
-  output.textContent = "> Reset!";
-});
-clearBtn.addEventListener("click", () => {
-  output.textContent = "";
-});
+    document.cookie = "reader=1; SameSite=None; Secure";
 
-const checkBtn5 = document.getElementById("check5");
-const clearBtn5 = document.getElementById("clear5");
-const output5 = document.getElementById("output5");
+    checkBtn5.addEventListener("click", () => {
+        if (
+            document.cookie.split(";").some((item) => item.trim().startsWith("reader="))
+        ) {
+            output5.textContent = '> The cookie "reader" exists';
+        } else {
+            output5.textContent = '> The cookie "reader" does not exist';
+        }
+    });
+    clearBtn5.addEventListener("click", () => {
+        output5.textContent = "";
+    });
 
-// Note that we are setting `SameSite=None;` in this example because the example
-// needs to work cross-origin.
-// It is more common not to set the `SameSite` attribute, which results in the default,
-// and more secure, value of `SameSite=Lax;`
-document.cookie = "reader=1; SameSite=None; Secure";
+    // EX6: Check if cookie has a specific value
+    const checkBtn6 = document.getElementById("check6");
+    const clearBtn6 = document.getElementById("clear6");
+    const output6 = document.getElementById("output6");
 
-checkBtn.addEventListener("click", () => {
-  if (
-    document.cookie.split(";").some((item) => item.trim().startsWith("reader="))
-  ) {
-    output.textContent = '> The cookie "reader" exists';
-  } else {
-    output.textContent = '> The cookie "reader" does not exist';
-  }
-});
-clearBtn.addEventListener("click", () => {
-  output.textContent = "";
-});
+    checkBtn6.addEventListener("click", () => {
+        if (document.cookie.split(";").some((item) => item.includes("reader=1"))) {
+            output6.textContent = '> The cookie "reader" has a value of "1"';
+        }
+    });
+    clearBtn6.addEventListener("click", () => {
+        output6.textContent = "";
+    });
+</script>
 
-const checkBtn6 = document.getElementById("check6");
-const clearBtn6 = document.getElementById("clear6");
-const output6 = document.getElementById("output"6);
-
-checkBtn.addEventListener("click", () => {
-  if (document.cookie.split(";").some((item) => item.includes("reader=1"))) {
-    output.textContent = '> The cookie "reader" has a value of "1"';
-  }
-});
-clearBtn.addEventListener("click", () => {
-  output.textContent = "";
-});
-
-
-
-
-        
-    </script>
 </body>
 </html>
